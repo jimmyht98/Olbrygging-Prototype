@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ambassadørsiden, prototype</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="draft"><strong>UTKAST – må bekreftes av bedriften.</strong> Alle navn, produkter, datoer og tall på siden er fiktive.</div>
+
+<div class="top">
+  <a class="brand" href="#oversikt">Ølbrygging <span id="brandRole">ambassadør</span></a>
+  <nav class="tabs" aria-label="Hovedmeny">
+    <a href="#oversikt" data-tab="oversikt">Oversikt</a>
+    <a href="#forslag" data-tab="forslag">Forslag<span class="count" id="navCount"></span></a>
+    <a href="#avtale" data-tab="avtale">Avtale</a>
+    <a href="#kontakt" data-tab="kontakt">Kontakt</a>
+  </nav>
+  <button class="btn ghost theme" id="themeBtn" data-action="theme"></button>
+</div>
+
+<main>
+  <section class="view" id="v-oversikt" aria-labelledby="h-oversikt">
+    <h1 id="h-oversikt">Hei, Bård</h1>
+    <p class="lead">Her ser du hva Ølbrygging foreslår, hva du har sagt ja til, og når dere snakkes neste gang.</p>
+
+    <div class="cap">
+      <div class="glass" aria-hidden="true"><i id="capFill"></i></div>
+      <div>
+        <h2>Hvor mye tid har du nå?</h2>
+        <div class="seg" id="capSeg" role="group" aria-label="Kapasitet">
+          <button data-action="cap" data-v="god">God tid</button>
+          <button data-action="cap" data-v="litt">Litt tid</button>
+          <button data-action="cap" data-v="pause">Pause</button>
+        </div>
+        <p id="capText"></p>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Akkurat nå</h2>
+      <div class="facts" id="facts"></div>
+    </div>
+
+    <div class="block">
+      <h2>Dette har du sagt ja til</h2>
+      <div class="stack" id="accepted"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-forslag" aria-labelledby="h-forslag">
+    <h1 id="h-forslag">Forslag til deg</h1>
+    <p class="lead">Du velger selv. Et nei påvirker ikke samarbeidet. Format, kanal og vinkling bestemmer du.</p>
+    <div class="block">
+      <h2>Interessene dine</h2>
+      <div class="chips" id="chips" role="group" aria-label="Interesser"></div>
+      <p class="muted small" style="margin-top:.5rem">Du får bare forslag innen interessene du har valgt.</p>
+    </div>
+    <div class="block">
+      <h2>Venter på svar</h2>
+      <div class="stack" id="openList"></div>
+    </div>
+    <div class="block">
+      <h2>Besvart</h2>
+      <div class="stack" id="doneList"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-avtale" aria-labelledby="h-avtale">
+    <h1 id="h-avtale">Avtalen din</h1>
+    <p class="lead">Gjelder fra 1. september 2026 til 31. august 2027. Du sier opp eller tar pause når du vil.</p>
+    <div class="block two stack">
+      <div class="panel">
+        <h2>Dette får du</h2>
+        <ul class="plain" style="margin-top:.7rem">
+          <li>Gratis produkter du selv sier ja til.</li>
+          <li>En personlig rabattkode til følgerne dine.</li>
+          <li>Én fast kontaktperson hos Ølbrygging.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Dette forventer vi</h2>
+        <ul class="plain" style="margin-top:.7rem">
+          <li>Du svarer ja eller nei på forslag innen svarfristen.</li>
+          <li>Du sier fra når du trenger mer tid eller pause.</li>
+          <li>Ingen krav til antall innlegg. Innholdet er ditt.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="block" id="signBox"></div>
+
+    <div class="block">
+      <h2>Faste innsjekk</h2>
+      <div class="panel stack" id="checkin"></div>
+    </div>
+
+    <div class="block">
+      <h2>Rabattkoden din</h2>
+      <div class="panel stack">
+        <div class="row" style="justify-content:space-between">
+          <span class="code">BARD10</span>
+          <button class="btn ghost" data-action="copy">Kopier koden</button>
+        </div>
+        <p>Følgerne dine har brukt koden 14 ganger siden 1. oktober.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="v-kontakt" aria-labelledby="h-kontakt">
+    <h1 id="h-kontakt">Kontaktpersonen din</h1>
+    <p class="lead">Du har én fast kontakt. Denne siden erstatter ikke kanalen dere bruker i dag.</p>
+    <div class="block panel stack">
+      <h2>Carsten Nilsen</h2>
+      <p>Carsten følger opp samarbeidet ditt og svarer på spørsmål om produkter, frister og avtalen.</p>
+      <div>
+        <p style="font-weight:500;margin-bottom:.4rem">Hvor vil du ha beskjeder fra Carsten?</p>
+        <div class="chips" id="channels" role="group" aria-label="Foretrukket kanal"></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Skriv til Carsten</h2>
+      <div class="panel stack">
+        <div>
+          <label for="topic">Hva gjelder det?</label>
+          <select id="topic">
+            <option>Spørsmål om et produkt</option>
+            <option>Jeg trenger mer tid</option>
+            <option>Idé til innhold</option>
+            <option>Noe annet</option>
+          </select>
+        </div>
+        <div>
+          <label for="msg">Melding</label>
+          <textarea id="msg"></textarea>
+          <p class="err" id="msgErr" hidden>Skriv en melding før du sender.</p>
+        </div>
+        <div><button class="btn" data-action="send">Send melding</button></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Sendte meldinger</h2>
+      <div class="panel" id="sent"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-ansatt" aria-labelledby="h-ansatt">
+    <h1 id="h-ansatt">Mine ambassadører</h1>
+    <p class="lead">Du er Carsten Nilsen og har ansvar for fire ambassadører. Her ser du hvem som venter på deg, og hvem du venter på.</p>
+    <div class="block"><div class="facts" id="staffFacts"></div></div>
+    <div class="block">
+      <h2>Ambassadørene dine</h2>
+      <div class="stack" id="staffList"></div>
+    </div>
+  </section>
+
+  <div class="foot row" style="justify-content:space-between">
+    <p class="muted small">Prototype for brukertest. Gruppe 10, IS-219. <a href="#ansatt" id="switch">Åpne ansattvisningen</a></p>
+    <button class="btn ghost" data-action="reset">Nullstill testen</button>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
